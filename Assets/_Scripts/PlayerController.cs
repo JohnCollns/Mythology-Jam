@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public bool rightwardWind = true;
-<<<<<<< HEAD
     public float windAcc;
     public float maxSpeed;
 
@@ -16,10 +15,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D col;
 
-=======
-    public float windForce;
     public AudioSource AS;
->>>>>>> 57cc9c1e2e77689ea1c96b0279f7b889a07d1b37
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +28,6 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-<<<<<<< HEAD
 
     void FixedUpdate()
     {
@@ -49,13 +44,12 @@ public class PlayerController : MonoBehaviour
         rightwardWind = !rightwardWind;
     }
     public void SetWindDirection(bool newDir) { rightwardWind = newDir; }
-=======
     
     void OnCollisionEnter (Collision collisionInfo)
     {
     
         {
-            UnityEnine.Debug.Log("A collision has occured");
+            print("A collision has occured");
             UnityEngine.Debug.Log(collisionInfo.collider.name);
             {
                 if (AS)
@@ -65,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    UnityEngine.Debug.Log("Collision sound not assigned")
+                    UnityEngine.Debug.Log("Collision sound not assigned");
                 }
                 
                 
@@ -73,5 +67,4 @@ public class PlayerController : MonoBehaviour
         }
         
     }
->>>>>>> 57cc9c1e2e77689ea1c96b0279f7b889a07d1b37
 }
