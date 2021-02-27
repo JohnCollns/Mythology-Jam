@@ -8,8 +8,12 @@ public class GameController : MonoBehaviour
 {
     public float maxHealth = 60 * 2;
     public float curHealth;
+    public float drainFreq, drainDamage;
     public float constHealthCost;
     public float travelSpeed;
+
+    public GameObject healthbarObj;
+    float fullHealthScale;
 
     bool normalRiver = true;
     bool rightWind = true;
@@ -20,13 +24,14 @@ public class GameController : MonoBehaviour
     {
         curHealth = maxHealth;
         pCont = GameObject.Find("scratch boat").GetComponent<PlayerController>();
-
+        fullHealthScale = healthbarObj.transform.localScale.x;
+        StartCoroutine(HealthDrain());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.G)) { curHealth -= 40f; }
         if (Input.GetKeyDown(KeyCode.D))
         {
             pCont.SetWindDirection(rightWind);
@@ -36,6 +41,9 @@ public class GameController : MonoBehaviour
             pCont.SetWindDirection(!rightWind);
         }
         if (Input.GetKey(KeyCode.S)) { pCont.PlayerSlow(); }
+
+        float healthRatio = curHealth / maxHealth;
+        healthbarObj.transform.localScale = new Vector3(fullHealthScale * healthRatio, 1f, 1f);
     }
     public void TakeDamage(float damageAmt)
     {
@@ -46,4 +54,14 @@ public class GameController : MonoBehaviour
         }
     }
     public float GetHealth() { return curHealth; }
+
+    IEnumerator HealthDrain()
+    {
+        //curHealth -= drainDamage;
+        while (true) { 
+            TakeDamage(drainDamage);
+            print("Taking damage over time");
+            yield return new WaitForSeconds(drainFreq);
+        }
+    }
 }

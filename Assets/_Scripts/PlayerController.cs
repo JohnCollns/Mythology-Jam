@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         gCont.curHealth--;
 
         collidedObjects = new ArrayList();
+        collidedObstacles = new ArrayList();
     }
 
     // Update is called once per frame
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(rb.velocity.x) > maxSideSpeed)
         {
             rb.velocity = new Vector2((rb.velocity.x > 0 ? 1 : -1) * maxSideSpeed, rb.velocity.y);
-            print("Boat travelling at max sideways speed: " + maxSideSpeed);
+            //print("Boat travelling at max sideways speed: " + maxSideSpeed);
         }
         if (rb.velocity.y < forwardSpeed[world])
         {
@@ -92,53 +93,71 @@ public class PlayerController : MonoBehaviour
             print("Boat maximally deccelerated");
         }
     }
-    
-    void OnCollisionEnter (Collision collisionInfo)
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("Boat has entered trigger: " + collision.gameObject.name);
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            if (collidedObjects.Contains(collision.gameObject))
+            {
+
+            }
+            else
+            {
+                Obstacle thisObstacle = collision.gameObject.GetComponent<Obstacle>();
+                collidedObstacles.Add(thisObstacle);
+                collidedObjects.Add(collision.gameObject);
+                gCont.TakeDamage(thisObstacle.damage);
+            }
+        }
+    }
+
+    void OnCollisionEnter2D (Collision2D collisionInfo)
     {
     
+        print("A collision has occured with: "+ collisionInfo.collider.name);
         {
-            print("A collision has occured with: "+ collisionInfo.collider.name);
+            if (collisionInfo.gameObject.tag == "Obstacle")
             {
-                if (collisionInfo.gameObject.tag == "Obstacle")
+                if (collidedObjects.Contains(collisionInfo.gameObject)) 
                 {
-                    if (collidedObjects.Contains(collisionInfo.gameObject)) 
-                    {
 
-                    }
-                    else
-                    {
-                        Obstacle thisObstacle = collisionInfo.gameObject.GetComponent<Obstacle>();
-                        collidedObstacles.Add(thisObstacle);
-                        collidedObjects.Add(collisionInfo.gameObject);
-
-                    }
-                }
-                
-                if (AS)
-                {
-                    GetComponent<AudioSource>().Play();
-                    print("Collision sound working");
                 }
                 else
                 {
-                    print("Collision sound not assigned");
+                    Obstacle thisObstacle = collisionInfo.gameObject.GetComponent<Obstacle>();
+                    collidedObstacles.Add(thisObstacle);
+                    collidedObjects.Add(collisionInfo.gameObject);
+                    gCont.TakeDamage(thisObstacle.damage);
                 }
-
-                //if (collisionInfo.collider.name == "")
-                // {
-                //    curHealth = curHealth - damageValue * damageModifier1
-                // }
-                // elseIf (collisionInfo.collider.name == "")
-                // { 
-                //    curHealth = curHealth - damageValue * damageModifier2
-                // }
-                // elseIf (collisionInfo.collider.name == "")
-                //{
-                //    curHealth = curHealth - damageValue * damageModifier 3
-                //}
-                //etc. etc.
             }
+                
+            if (AS)
+            {
+                GetComponent<AudioSource>().Play();
+                print("Collision sound working");
+            }
+            else
+            {
+                print("Collision sound not assigned");
+            }
+
+            //if (collisionInfo.collider.name == "")
+            // {
+            //    curHealth = curHealth - damageValue * damageModifier1
+            // }
+            // elseIf (collisionInfo.collider.name == "")
+            // { 
+            //    curHealth = curHealth - damageValue * damageModifier2
+            // }
+            // elseIf (collisionInfo.collider.name == "")
+            //{
+            //    curHealth = curHealth - damageValue * damageModifier 3
+            //}
+            //etc. etc.
         }
+        
         
     }
 }
