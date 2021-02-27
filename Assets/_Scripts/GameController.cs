@@ -31,5 +31,6 @@ public class GameController : MonoBehaviour
         {
             pCont.SetWindDirection(!rightWind);
         }
+        if (Input.GetKey(KeyCode.S)) { pCont.PlayerSlow(); }
     }
 }
