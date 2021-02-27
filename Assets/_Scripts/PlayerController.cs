@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float forwardSpeed = 5f;
     public float forwardAcc, forwardDeacc;
+    public float damageValue;
+    public float damgaeModifier1;
+    public float damageModifier2;
+    public float damageModifier3;
 
     Vector2 windForce;
     Vector2 normalForwardForce;
@@ -21,6 +25,7 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D col;
 
     public AudioSource AS;
+    GameController gCont;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,6 +37,9 @@ public class PlayerController : MonoBehaviour
         forwardSlow = new Vector2(0f, -forwardDeacc);
         if (travelFowards)
             rb.velocity = normalForwardForce;
+        gCont = GameObject.Find("Game Controller").GetComponent<GameController>();
+        gCont.GetHealth();
+        gCont.curHealth--;
     }
 
     // Update is called once per frame
@@ -81,14 +89,26 @@ public class PlayerController : MonoBehaviour
                 if (AS)
                 {
                     GetComponent<AudioSource>().Play();
-                    UnityEngine.Debug.Log("Collision sound working");
+                    print("Collision sound working");
                 }
                 else
                 {
-                    UnityEngine.Debug.Log("Collision sound not assigned");
+                    print("Collision sound not assigned");
                 }
-                
-                
+
+                //if (collisionInfo.collider.name == "")
+                // {
+                //    curHealth = curHealth - damageValue * damageModifier1
+                // }
+                // elseIf (collisionInfo.collider.name == "")
+                // { 
+                //    curHealth = curHealth - damageValue * damageModifier2
+                // }
+                // elseIf (collisionInfo.collider.name == "")
+                //{
+                //    curHealth = curHealth - damageValue * damageModifier 3
+                //}
+                //etc. etc.
             }
         }
         
