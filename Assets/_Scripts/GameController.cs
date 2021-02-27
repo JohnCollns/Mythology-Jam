@@ -37,6 +37,13 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S)) { pCont.PlayerSlow(); }
     }
-
+    public void TakeDamage(float damageAmt)
+    {
+        curHealth -= damageAmt;
+        if (curHealth <= 0)
+        {
+            print("Health has fallen to 0, game over. (Not yet implemented)");
+        }
+    }
     public float GetHealth() { return curHealth; }
 }
