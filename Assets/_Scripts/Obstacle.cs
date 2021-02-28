@@ -6,6 +6,7 @@ public class Obstacle : MonoBehaviour
 {
     public float damage;
     public float fullPushAcc;
+    public int world;
     Rigidbody2D rb;
 
     void OnCollisionStay2D(Collision2D collision)   //OnCollisionStay2D

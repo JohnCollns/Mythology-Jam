@@ -18,7 +18,13 @@ public class GameController : MonoBehaviour
     bool normalRiver = true;
     bool rightWind = true;
 
+    public float changeRiverCooldown = 2f;
+    bool allowChangeRiver = true;
+
     PlayerController pCont;
+    Light mainLight;
+    public Color overworldColor, underworldColor;
+    public float colorChangeTime = 0.6f;
 
     void Start()
     {
@@ -26,6 +32,7 @@ public class GameController : MonoBehaviour
         pCont = GameObject.Find("scratch boat").GetComponent<PlayerController>();
         fullHealthScale = healthbarObj.transform.localScale.x;
         StartCoroutine(HealthDrain());
+        mainLight = GameObject.Find("Main Light").GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -41,9 +48,26 @@ public class GameController : MonoBehaviour
             pCont.SetWindDirection(!rightWind);
         }
         if (Input.GetKey(KeyCode.S)) { pCont.PlayerSlow(); }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (allowChangeRiver)
+            {
+                ChangeRiver();
+                StartCoroutine(RiverCooldown());
+            }
+        }
 
         float healthRatio = curHealth / maxHealth;
         healthbarObj.transform.localScale = new Vector3(fullHealthScale * healthRatio, 1f, 1f);
+    }
+
+    void ChangeRiver()
+    {
+        normalRiver = !normalRiver;
+        pCont.SetRiver(normalRiver ? 0 : 1);
+        //mainLight.color = (normalRiver ? overworldColor : underworldColor);
+        Color targetColor = (normalRiver ? overworldColor : underworldColor);
+
     }
     public void TakeDamage(float damageAmt)
     {
@@ -64,6 +88,23 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(drainFreq);
         }
     }
+
+    IEnumerator RiverCooldown()
+    {
+        //normalRiver = !normalRiver;
+        allowChangeRiver = false;
+
+        yield return new WaitForSeconds(changeRiverCooldown);
+        allowChangeRiver = true;
+        
+    }
+    /*IEnumerator LerpLight(Color targetColor)
+    {
+        Color baseColor = mainLight.color;
+        float t = 
+        Color newColor = Color.Lerp(baseColor, targetColor, )
+        colorChangeTime
+    }*/
 
     public bool GetRightWind() { return rightWind; }
 }

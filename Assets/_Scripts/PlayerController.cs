@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float forwardAcc, forwardDeacc;
     public float minForwardSpeed = 2f;
     public float slowedTurnMultiplier = 1.4f;
+    public float frictionConst;
+    public float acceptableSpeedDif;
 
     public float damageValue;
     public float[] damageModifiers;
@@ -74,7 +76,30 @@ public class PlayerController : MonoBehaviour
         }
         if (rb.velocity.y > forwardSpeed[world])
         {
-            rb.velocity = new Vector2(rb.velocity.x, forwardSpeed[world]);
+            // v1
+            //rb.velocity = new Vector2(rb.velocity.x, forwardSpeed[world]);
+            //Vector2 fricForce2D = -frictionConst * rb.velocity.normalized * rb.velocity.sqrMagnitude;
+            //Vector2 fricForce = new Vector2(0f, fricForce2D.y);
+
+            // v2
+            //float fricAcc = -frictionConst * rb.velocity.y;
+            //Vector2 fricForce = new Vector2(0, fricAcc);
+
+            float speedDif = rb.velocity.y - forwardSpeed[world];
+            if (speedDif < acceptableSpeedDif)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, forwardSpeed[world]);
+                print("Cutting boat speed down to: " + forwardSpeed[world]);
+            }
+            else
+            {
+                float fricAcc = -frictionConst * rb.velocity.y;
+                Vector2 fricForce = new Vector2(0, fricAcc);
+                rb.AddForce(fricForce);
+                print("Boat has exceeded its world speed, slowing down by: " + fricForce);
+            }
+
+            
         }
         
     }
@@ -156,6 +181,14 @@ public class PlayerController : MonoBehaviour
             //}
             //etc. etc.
         }
+        
+        
+    }
+
+    public void SetRiver(int newRiver)
+    {
+        world = (short)newRiver;
+        print("Setting river to: " + world);
         
         
     }
