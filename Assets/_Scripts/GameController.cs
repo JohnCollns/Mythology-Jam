@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public float maxHealth = 60 * 2;
-    public float curHealth;
+    float curHealth;
     public float drainFreq, drainDamage;
     public float constHealthCost;
     public float travelSpeed;
@@ -60,8 +60,10 @@ public class GameController : MonoBehaviour
         //curHealth -= drainDamage;
         while (true) { 
             TakeDamage(drainDamage);
-            print("Taking damage over time");
+            //print("Taking damage over time");
             yield return new WaitForSeconds(drainFreq);
         }
     }
+
+    public bool GetRightWind() { return rightWind; }
 }

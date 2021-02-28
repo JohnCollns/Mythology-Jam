@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
         if (travelFowards)
             rb.velocity = normalForwardForce;
         gCont = GameObject.Find("Game Controller").GetComponent<GameController>();
-        gCont.GetHealth();
-        gCont.curHealth--;
 
         collidedObjects = new ArrayList();
         collidedObstacles = new ArrayList();
@@ -83,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
     public void InvertWind() { rightwardWind = !rightwardWind; }
     public void SetWindDirection(bool newDir) { rightwardWind = newDir; }
+    public bool GetRightWardWind() { return rightwardWind; }
     public void PlayerSlow()
     {
         rb.AddForce(forwardSlow);
