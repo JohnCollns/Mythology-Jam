@@ -135,6 +135,15 @@ public class PlayerController : MonoBehaviour
                 gCont.TakeDamage(thisObstacle.damage);
             }
         }
+        if (AS)
+        {
+            GetComponent<AudioSource>().Play();
+            print("Trigger sound working");
+        }
+        else
+        {
+            print("Trigger sound error");
+        }
     }
 
     void OnCollisionEnter2D (Collision2D collisionInfo)
@@ -167,19 +176,7 @@ public class PlayerController : MonoBehaviour
                 print("Collision sound not assigned");
             }
 
-            //if (collisionInfo.collider.name == "")
-            // {
-            //    curHealth = curHealth - damageValue * damageModifier1
-            // }
-            // elseIf (collisionInfo.collider.name == "")
-            // { 
-            //    curHealth = curHealth - damageValue * damageModifier2
-            // }
-            // elseIf (collisionInfo.collider.name == "")
-            //{
-            //    curHealth = curHealth - damageValue * damageModifier 3
-            //}
-            //etc. etc.
+
         }
         
         
