@@ -33,7 +33,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D col;
 
-    public AudioSource AS;
+    public AudioClip AS;
+    public AudioClip wind;
+    public AudioClip water;
+    public AudioSource sound;
     GameController gCont;
     void Start()
     {
@@ -50,12 +53,15 @@ public class PlayerController : MonoBehaviour
 
         collidedObjects = new ArrayList();
         collidedObstacles = new ArrayList();
+        sound = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+
     }
 
     void FixedUpdate()
@@ -137,12 +143,12 @@ public class PlayerController : MonoBehaviour
         }
         if (AS)
         {
-            GetComponent<AudioSource>().Play();
+            sound.PlayOneShot(AS);
             print("Trigger sound working");
         }
         else
         {
-            print("Trigger sound error");
+            print("Trigger sound not assigned or error");
         }
     }
 
@@ -165,15 +171,15 @@ public class PlayerController : MonoBehaviour
                     gCont.TakeDamage(thisObstacle.damage);
                 }
             }
-                
+
             if (AS)
             {
-                GetComponent<AudioSource>().Play();
-                print("Collision sound working");
+                sound.PlayOneShot(AS);
+                print("Trigger sound working");
             }
             else
             {
-                print("Collision sound not assigned");
+                print("Trigger sound not assigned or error");
             }
 
 
