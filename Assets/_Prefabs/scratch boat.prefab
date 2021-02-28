@@ -51,12 +51,14 @@ MonoBehaviour:
   windAcc: 200
   maxSideSpeed: 2
   forwardSpeed:
-  - 5
-  - 7.5
+  - 4
+  - 7
   forwardAcc: 100
   forwardDeacc: 125
   minForwardSpeed: 2
   slowedTurnMultiplier: 1.4
+  frictionConst: 0
+  acceptableSpeedDif: 0
   damageValue: 0
   damageModifiers: []
   AS: {fileID: 0}

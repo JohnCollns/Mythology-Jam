@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour
     public Color overworldColor, underworldColor;
     public float colorChangeTime = 0.6f;
 
+    ArrayList overworldObstacles, underworldObstacles;
+    //ArrayList[] obstacles = new ArrayList[2];
+
     void Start()
     {
         curHealth = maxHealth;
@@ -33,6 +36,14 @@ public class GameController : MonoBehaviour
         fullHealthScale = healthbarObj.transform.localScale.x;
         StartCoroutine(HealthDrain());
         mainLight = GameObject.Find("Main Light").GetComponent<Light>();
+        overworldObstacles = new ArrayList();
+        underworldObstacles = new ArrayList();
+        //obstacles = [overworldObstacles, overworldObstacles];
+        FindObstacles();
+        foreach (GameObject obj in underworldObstacles)
+        {
+            obj.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -67,7 +78,35 @@ public class GameController : MonoBehaviour
         pCont.SetRiver(normalRiver ? 0 : 1);
         //mainLight.color = (normalRiver ? overworldColor : underworldColor);
         Color targetColor = (normalRiver ? overworldColor : underworldColor);
+        Color prevColor = (normalRiver ? underworldColor : overworldColor);
+        //StopCoroutine(LerpLight(prevColor));
+        mainLight.color = prevColor;
         StartCoroutine(LerpLight(targetColor));
+
+        foreach (GameObject obj in overworldObstacles)
+        {
+            obj.SetActive(normalRiver);
+        }
+        foreach (GameObject obj in underworldObstacles)
+        {
+            obj.SetActive(!normalRiver);
+        }
+    }
+
+    void FindObstacles()
+    {
+        //overworldObstacles, underworldObstacles
+        GameObject obParent = GameObject.Find("Obstacles");
+        for (int i=0; i < obParent.transform.childCount; i++)
+        {
+            if (obParent.transform.GetChild(i).GetComponent<Obstacle>().world == 0)
+                overworldObstacles.Add(obParent.transform.GetChild(i).gameObject);
+            else
+                underworldObstacles.Add(obParent.transform.GetChild(i).gameObject);
+
+
+        }
+        print("Obstacles found: " + obParent.transform.childCount + ", overworld: " + overworldObstacles.Count + ", underworld: " + underworldObstacles.Count);
     }
     public void TakeDamage(float damageAmt)
     {
@@ -96,22 +135,22 @@ public class GameController : MonoBehaviour
 
         yield return new WaitForSeconds(changeRiverCooldown);
         allowChangeRiver = true;
-        
+        print("River change now legal");
     }
     IEnumerator LerpLight(Color targetColor)
     {
         //print("Starting LerpLight");
         Color baseColor = mainLight.color;
-        print("BaseColor: " + baseColor + ", targetColor: " + targetColor);
+        //print("BaseColor: " + baseColor + ", targetColor: " + targetColor);
         //float startTime = Time.time;
         //float targetTime = startTime + colorChangeTime;
         //Color newColor = Color.Lerp(baseColor, targetColor, )
-        print("Difference between mainLight.color and targetColor: " + Mathf.Abs(mainLight.color.g - targetColor.g));
-        while (Mathf.Abs(mainLight.color.g - targetColor.g) > 0.05f)
+        //print("Difference between mainLight.color and targetColor: " + Mathf.Abs(mainLight.color.g - targetColor.g));
+        while (Mathf.Abs(mainLight.color.g - targetColor.g) > 0.001f)
         {
             Color newColor = Color.Lerp(mainLight.color, targetColor, colorChangeTime * Time.deltaTime);
             mainLight.color = newColor;
-            print("Updating color of mainLight to: " + newColor);
+            //print("Updating color of mainLight to: " + newColor);
             yield return new WaitForEndOfFrame();
         }
     }

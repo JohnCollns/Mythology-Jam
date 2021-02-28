@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < forwardSpeed[world])
         {
             rb.AddForce(forwardForce);
-            print("Accelerating boat, y speed: " + rb.velocity.y);
+            //print("Accelerating boat, y speed: " + rb.velocity.y);
         }
         if (rb.velocity.y > forwardSpeed[world])
         {
@@ -89,14 +89,14 @@ public class PlayerController : MonoBehaviour
             if (speedDif < acceptableSpeedDif)
             {
                 rb.velocity = new Vector2(rb.velocity.x, forwardSpeed[world]);
-                print("Cutting boat speed down to: " + forwardSpeed[world]);
+                //print("Cutting boat speed down to: " + forwardSpeed[world]);
             }
             else
             {
                 float fricAcc = -frictionConst * rb.velocity.y;
                 Vector2 fricForce = new Vector2(0, fricAcc);
                 rb.AddForce(fricForce);
-                print("Boat has exceeded its world speed, slowing down by: " + fricForce);
+                //print("Boat has exceeded its world speed, slowing down by: " + fricForce);
             }
 
             
