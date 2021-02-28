@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
         pCont.SetRiver(normalRiver ? 0 : 1);
         //mainLight.color = (normalRiver ? overworldColor : underworldColor);
         Color targetColor = (normalRiver ? overworldColor : underworldColor);
-
+        StartCoroutine(LerpLight(targetColor));
     }
     public void TakeDamage(float damageAmt)
     {
@@ -98,13 +98,23 @@ public class GameController : MonoBehaviour
         allowChangeRiver = true;
         
     }
-    /*IEnumerator LerpLight(Color targetColor)
+    IEnumerator LerpLight(Color targetColor)
     {
+        //print("Starting LerpLight");
         Color baseColor = mainLight.color;
-        float t = 
-        Color newColor = Color.Lerp(baseColor, targetColor, )
-        colorChangeTime
-    }*/
+        print("BaseColor: " + baseColor + ", targetColor: " + targetColor);
+        //float startTime = Time.time;
+        //float targetTime = startTime + colorChangeTime;
+        //Color newColor = Color.Lerp(baseColor, targetColor, )
+        print("Difference between mainLight.color and targetColor: " + Mathf.Abs(mainLight.color.g - targetColor.g));
+        while (Mathf.Abs(mainLight.color.g - targetColor.g) > 0.05f)
+        {
+            Color newColor = Color.Lerp(mainLight.color, targetColor, colorChangeTime * Time.deltaTime);
+            mainLight.color = newColor;
+            print("Updating color of mainLight to: " + newColor);
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
     public bool GetRightWind() { return rightWind; }
 }

@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 180
-  curHealth: 120
   drainFreq: 0.3
-  drainDamage: 1
+  drainDamage: 0.3
   constHealthCost: 0
   travelSpeed: 0
   healthbarObj: {fileID: 0}
+  changeRiverCooldown: 2
+  overworldColor: {r: 1, g: 1, b: 1, a: 0}
+  underworldColor: {r: 1, g: 0, b: 0, a: 0}
+  colorChangeTime: 0.6

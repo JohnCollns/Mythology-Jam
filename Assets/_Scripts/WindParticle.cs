@@ -34,7 +34,7 @@ public class WindParticle : MonoBehaviour
         {
             rightWind = pCont.GetRightWardWind();
             rb.AddForce(windForce * (rightWind ? 1f : -1f));
-            print("Wind particle changing direction.");
+            //print("Wind particle changing direction.");
         }
         if (Mathf.Abs(rb.velocity.magnitude) < maxSpeed)
         {

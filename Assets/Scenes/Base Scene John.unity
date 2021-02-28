@@ -1619,13 +1619,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7171662638352249105, guid: 566209b1173a8e64b999603aa9442172, type: 3}
-      propertyPath: drainDamage
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7171662638352249105, guid: 566209b1173a8e64b999603aa9442172, type: 3}
       propertyPath: healthbarObj
       value: 
       objectReference: {fileID: 551890336}
+    - target: {fileID: 7171662638352249105, guid: 566209b1173a8e64b999603aa9442172, type: 3}
+      propertyPath: colorChangeTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7171662638352249111, guid: 566209b1173a8e64b999603aa9442172, type: 3}
       propertyPath: m_Name
       value: Game Controller
