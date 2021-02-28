@@ -218,19 +218,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67384045}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &68889950 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8185399762138411340, guid: 4a1d1a5943f5ae34d9147211df22b6dc, type: 3}
-  m_PrefabInstance: {fileID: 8816380636301564321}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &68889958
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68889950}
-  m_Enabled: 1
 --- !u!1 &264965135
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,19 +535,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679203251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &885357595 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7956318513859979439, guid: 3acc1bf25b6b29a4b812489ad80c45d2, type: 3}
-  m_PrefabInstance: {fileID: 1162136009512328695}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &885357603
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885357595}
-  m_Enabled: 1
 --- !u!1 &941098223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,19 +1175,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1483941137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6455458692134829415, guid: 6c8db4e1d9e440e4c8cd89f4e207c3d7, type: 3}
-  m_PrefabInstance: {fileID: 1780325038}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &1483941145
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483941137}
-  m_Enabled: 1
 --- !u!1 &1584112500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,19 +1327,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c8db4e1d9e440e4c8cd89f4e207c3d7, type: 3}
---- !u!1 &1860023050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6455458692134829415, guid: 6c8db4e1d9e440e4c8cd89f4e207c3d7, type: 3}
-  m_PrefabInstance: {fileID: 6455458691227920382}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &1860023058
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860023050}
-  m_Enabled: 1
 --- !u!1 &1996184014
 GameObject:
   m_ObjectHideFlags: 0
